@@ -27,19 +27,29 @@ function formatData(recipes) {
         recipes[i].id = `0${i}`;
         formatedRecipes.push(recipes[i])
     }
+    console.log(formatedRecipes)
     return formatedRecipes
 }
 const saveDatainRecipes = (data) => availableRecipes = data;
 
 function paintMixForSelectedOption(selectedRecipe) {
-
+    const currency = selectedRecipe.currency;
     selectedRecipe.ingredients.map(ingredient => {
-        const html = `<input class="form-check-input js-mix-check" type="checkbox" value="" id="">
+        const html = `
+        <input class="form-check-input js-mix-check" type="checkbox" value="" id="">
+        <input type="number" class="" id="selectQuantity"value= 1 />
+        <label for="selectQuantity" class="sr-only">Cantidad</label>
        <label class="form-check-label" for="">
-           ${ingredient.product}
-       </label>`
+       <div>
+           <p>${ingredient.product}<p>
+           <p>${ingredient.brand}<p>
+           <span>${ingredient.quantity}</span>
+           </div>
+       </label>
+       <p class="">${ingredient.price} ${currency}</p>
+       `
         const newItem = document.createElement("div");
-        newItem.setAttribute("class", "form-check");
+        newItem.setAttribute("class", "form-check flex-row justify-content-center align-items-center");
         newItem.innerHTML = html;
         mixIngredientsList.appendChild(newItem)
     })
