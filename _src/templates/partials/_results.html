@@ -1,4 +1,31 @@
-<div>
-    <p>Resultados</p>
+<div clas='@@aClass'>
+    <div>
+        <span>
+            Items
+            <select name="configItems">
+                <option value="1">1</option>
+            </select>
+        </span>
+    </div>
+    <div class="d-flex flex-column">
+        <div class="lead d-flex align-items-center justify-content-around">Subtotal:
+            <div>
+                <small class="js-resultsubtotal">14.2</small>
+                <small class="js-currency"> €</small>
+            </div>
+        </div>
+        <div class="lead d-flex align-items-center justify-content-around">Gastos de envío:
+            <div>
+                <small class="js-resultshipcost">5.89</small>
+                <small class="js-currency"> €</small>
+            </div>
+        </div>
+        <div class="lead d-flex align-items-center justify-content-around">Total:
+            <div>
+                <small class="js-resultstotal">20.09</small>
+                <small class="js-currency"> €</small>
+            </div>
+        </div>
+    </div>
     <button class="btn-success">Comprar ingredientes</button>
 </div>
