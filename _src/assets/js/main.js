@@ -6,7 +6,6 @@ const mixCheckboxes = document.querySelectorAll(".js-mix-check")
 const mixIngredientsList = document.querySelector(".js-list")
 
 let availableRecipes = [];
-let partialItemsAndQuantity = []
 let testValueSelectedRecipe = "recipe-01"
 
 function getRecipes() {
@@ -17,7 +16,8 @@ function getRecipes() {
             saveDatainRecipes(data);
             // renderOptionsForRecipes(data) // return select value matching item;
             paintMixForSelectedOption(data[0]);
-            readCheckboxesItemsandQuantity() //data[0];
+            readCheckboxesItemsandQuantity(data[0]) //data[0];
+                ;
 
 
 
@@ -60,20 +60,58 @@ function paintMixForSelectedOption(selectedRecipe) {
     })
 }
 
-function readCheckboxesItemsandQuantity() {
-    let partialItemsAndQuantity = []
+function displayResults(ingredients, subtotal) {
+    const showSubtotal = document.querySelector(".js-resultsubtotal");
+    const showShippingCost = document.querySelector(".js-resultshipcost");
+    showSubtotal.innerHTML = `${subtotal}`;
+    let calculateShipTaxes = 0;
+    for (let recipe of availableRecipes) {
+        if (recipe.id === ingredients.id) calculateShipTaxes = recipe["shipping-cost"]
+    }
+    showShippingCost.innerHTML = calculateShipTaxes
+}
+
+// Total seven : 22.83
+function calculatePrices(ingredients) {
+    let accIngredientsPrice = 0;
+    for (let recipe of availableRecipes) {
+        debugger;
+        if (recipe.id === ingredients.id) {
+            recipe.ingredients.map(ingredient => {
+                if (Object.keys(ingredients).includes(ingredient.product)) {
+                    let addQuantity = ingredient.price * ingredients[ingredient.product];
+                    accIngredientsPrice += addQuantity;
+                    // console.log(accIngredientsPrice)
+                }
+            })
+        }
+    }
+    console.log(accIngredientsPrice)
+    return displayResults(ingredients, accIngredientsPrice);
+
+}
+
+function readCheckboxesItemsandQuantity(recipe) {
+    let partialItemsAndQuantity = new Object;
+    let recipeId = recipe.id;
+    partialItemsAndQuantity.id = recipeId;
     let ingredientsElement = document.querySelectorAll(".js-ingredients");
     for (let ingredient of ingredientsElement) {
         let isChecked = ingredient.querySelector(".js-mix-check").checked;
         if (isChecked) {
             let productName = ingredient.querySelector(".js-ingredient_name").textContent;
             let quantityInput = parseInt(ingredient.querySelector(".js-quantity").value);
-            partialItemsAndQuantity.push({ [productName]: quantityInput })
+            if (productName === "shipping-cost") {
+                partialItemsAndQuantity[productName] = quantityInput;
+            }
+            partialItemsAndQuantity[productName] = quantityInput;
         }
 
     }
     console.log(partialItemsAndQuantity)
+    return calculatePrices(partialItemsAndQuantity)
 }
+
 
 // Init 
 getRecipes()
