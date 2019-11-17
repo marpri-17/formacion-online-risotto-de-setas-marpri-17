@@ -1,31 +1,38 @@
 <div clas='@@aClass'>
-    <div>
+    <div class="increase_item">
         <span>
             Items
-            <select name="configItems">
+            <select name="configItems" disabled>
                 <option value="1">1</option>
             </select>
         </span>
     </div>
     <div class="d-flex flex-column">
-        <div class="lead d-flex align-items-center justify-content-around">Subtotal:
-            <div>
-                <small class="js-resultsubtotal">14.2</small>
-                <small class="js-currency"> €</small>
+        <div class="lead d-flex align-items-center justify-content-around results_list_item">
+            <p class="results_title">Subtotal: </p>
+            <div class="">
+                <small class="js-resultsubtotal results_result">Cargando datos</small>
+                <small class="js-currency results_currency"> </small>
             </div>
         </div>
-        <div class="lead d-flex align-items-center justify-content-around">Gastos de envío:
-            <div>
-                <small class="js-resultshipcost">5.89</small>
-                <small class="js-currency"> €</small>
+        <div class="lead d-flex align-items-center justify-content-around results_list_item">
+            <p class="results_title">Gastos de envío:</p>
+            <div class="">
+                <small class="js-resultshipcost results_result">...</small>
+                <small class="js-currency results_currency"> </small>
             </div>
         </div>
-        <div class="lead d-flex align-items-center justify-content-around">Total:
-            <div>
-                <small class="js-resultstotal">20.09</small>
-                <small class="js-currency"> €</small>
+        <div class="lead d-flex align-items-center justify-content-around results_list_item">
+            <p class="results_title_total">Total:</p>
+            <div class="results_list_display">
+                <small class="js-resultstotal results_result_total">...</small>
+                <small class="js-currency results_currency"> </small>
             </div>
         </div>
     </div>
-    <button class="btn-success">Comprar ingredientes</button>
+    <div class="d-flex align-items-center justify-content-center align-items-center">
+        <button class="btn-success btn-purchase">
+            <a href="">Comprar ingredientes</a>
+        </button>
+    </div>
 </div>
