@@ -41,7 +41,7 @@ function paintMixForSelectedOption() {
         selectedRecipe.ingredients.map(ingredient => {
             const html = `
         <input class="form-check-input check js-mix-check results_list_checkboxes" type="checkbox" value="" id="" checked>
-        <input type="number" class="js-quantity results_list_quantitySelect" id="selectQuantity"value= 1 />
+        <input type="number" class="js-quantity results_list_quantitySelect" id="selectQuantity" value= "1" min="1"/>
         <label for="selectQuantity" class="sr-only">Cantidad</label>
        <label class="form-check-label results_list_labels" for="">
            <div class="js-ingredient_name">${ingredient.product}</div>
@@ -55,7 +55,8 @@ function paintMixForSelectedOption() {
             newItem.innerHTML = html;
             mixIngredientsList.appendChild(newItem)
         })
-        addListenerToCheckboxes(selectedRecipe)
+        addListenerToCheckboxes();
+        addListenerToQuantitySelects()
     }
 }
 
@@ -107,7 +108,13 @@ function readCheckboxesItemsandQuantity() {
             let isChecked = ingredient.querySelector(".js-mix-check").checked;
             if (isChecked) {
                 let productName = ingredient.querySelector(".js-ingredient_name").textContent;
-                let quantityInput = parseInt(ingredient.querySelector(".js-quantity").value);
+                debugger;
+                let quantityInput = 1;
+                if (parseInt(ingredient.querySelector(".js-quantity").value) < 1) {
+                    quantityInput = 0
+                } else {
+                    quantityInput = parseInt(ingredient.querySelector(".js-quantity").value)
+                };
                 if (productName === "shipping-cost") {
                     partialItemsAndQuantity[productName] = quantityInput;
                 }
@@ -123,9 +130,14 @@ function handleCheckBoxes() {
     readCheckboxesItemsandQuantity(recipe)
 }
 
-function addListenerToCheckboxes(recipe) {
+function addListenerToCheckboxes() {
     const ingredientsCheckboxes = document.querySelectorAll(".js-mix-check");
     ingredientsCheckboxes.forEach(ingredientCheckbox => ingredientCheckbox.addEventListener("click", readCheckboxesItemsandQuantity))
+}
+
+function addListenerToQuantitySelects() {
+    const quantitySelects = document.querySelectorAll(".js-quantity");
+    quantitySelects.forEach(quantitySelect => quantitySelect.addEventListener("change", readCheckboxesItemsandQuantity))
 
 }
 

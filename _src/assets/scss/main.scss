@@ -1,5 +1,4 @@
 @import "core/settings";
-@import "core/links";
 
 body {
   background-color: rgba(140, 180, 180, 0.2);
@@ -21,7 +20,7 @@ a {
 }
 .card {
   max-width: 95vw;
-  height: 100vh;
+  //height: 100vh;
   margin-left: auto;
   margin-right: auto;
   margin: 10px auto 10px auto;
